@@ -1,0 +1,47 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: finance_postgres
+    environment:
+      POSTGRES_USER: finance
+      POSTGRES_PASSWORD: finance
+      POSTGRES_DB: finance_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U finance -d finance_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    container_name: finance_api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_API_BASE: ${OPENAI_API_BASE}
+      LANGCHAIN_TRACING_V2: ${LANGCHAIN_TRACING_V2}
+      LANGCHAIN_API_KEY: ${LANGCHAIN_API_KEY}
+      LANGCHAIN_PROJECT: ${LANGCHAIN_PROJECT}
+      LANGCHAIN_ENDPOINT: ${LANGCHAIN_ENDPOINT}
+    ports:
+      - "8000:8000"
+
+  streamlit:
+    build:
+      context: .
+      dockerfile: streamlit_app/Dockerfile
+    container_name: finance_streamlit
+    depends_on:
+      - api
+    ports:
+      - "8501:8501"
+
+volumes:
+  postgres_data:

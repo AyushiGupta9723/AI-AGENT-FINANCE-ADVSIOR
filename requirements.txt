@@ -1,0 +1,16 @@
+langchain 
+langchain-core
+langchain-openai
+langchain-community
+
+faiss-cpu
+pypdf
+tiktoken
+python-dotenv
+langgraph
+fastapi
+uvicorn
+streamlit
+requests
+psycopg[binary]
+langgraph-checkpoint-postgres
