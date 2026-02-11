@@ -5,13 +5,11 @@ An end-to-end **production-style AI financial advisory system** built using mode
 This is **not a chatbot** — it is a **stateful, tool-driven, observable AI system** designed using real-world SaaS patterns.
 
 ---
+
+![**STREAMLIT UI**](image1.png)
+![**STREAMLIT UI**](image2.png)
+
 ---
-![**STREAMLIT UI**](image1.png)(image2.png)
-
-##  Project Structure
-
-```
-
 ## 🚀 Tech Stack
 
 **Backend & AI**
@@ -212,6 +210,7 @@ AI-FINANCE-ADVISOR-AGENT/
 ├── Dockerfile
 ├── requirements.txt
 └── .env
+
 ```
 
 ---
